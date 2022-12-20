@@ -8,8 +8,10 @@ app.use(bodyParser.json());
 
 app.use("/api", todoRoutes);
 
+const PORT = process.env.PORT || 5000;
+
 mongoose.set("strictQuery", false);
-app.listen(5000, () => {
+app.listen(PORT, () => {
   console.log("server is running on 5000...");
   mongoose
     .connect(
