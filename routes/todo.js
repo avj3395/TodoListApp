@@ -11,6 +11,6 @@ router.get("/get-user", getTodoList);
 
 router.post("/add-user", addTodoList);
 router.put("/update-user", updateUser);
-router.delete("/delete-user", deleteUser);
+router.post("/delete-user", deleteUser);
 
 export default router;
