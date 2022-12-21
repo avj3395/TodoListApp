@@ -65,8 +65,11 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   const { id } = req.body;
+
   try {
-    const deleteUser = await todoData.findByIdAndDelete(id);
+    const deleteUser = await todoData.findByIdAndDelete(
+      mongoose.Types.ObjectId(id)
+    );
     if (deleteUser) {
       return res
         .status(201)
