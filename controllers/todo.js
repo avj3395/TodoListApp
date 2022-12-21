@@ -1,4 +1,5 @@
 import todoData from "../models/todo.js";
+import mongoose from "mongoose";
 
 export const addTodoList = async (req, res) => {
   const { email, name } = req.body;
@@ -65,8 +66,15 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   const { id } = req.body;
   try {
-    const deleteUser = await todoData.deleteOne({ _id: id });
-    return res.status(201).json({ message: "User delete successfully" });
+    const deleteUser = await todoData.findByIdAndDelete(id);
+    if (deleteUser) {
+      return res
+        .status(201)
+        .json({ message: "User delete successfully", data: deleteUser });
+    } else {
+      return res.status(409).json({ message: "User delete failed" });
+    }
+    // console.log("delete user=======", deleteUser, id);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
